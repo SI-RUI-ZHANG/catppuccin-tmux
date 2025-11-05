@@ -90,10 +90,12 @@ main() {
   # These variables are the defaults so that the setw and set calls are easier to parse.
   local show_directory
   # Draw the rounded separator over the default background to avoid a dark cap
-  readonly show_directory="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
+  # Close client_prefix conditional to avoid swallowing the rest of status-right
+  readonly show_directory="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],}"
 
   local show_window
-  readonly show_window="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
+  # Close client_prefix conditional to avoid swallowing the rest of status-right
+  readonly show_window="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red],}"
 
   local show_session
   readonly show_session="#[fg=$thm_green,bg=default]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
