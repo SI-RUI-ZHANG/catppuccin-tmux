@@ -157,7 +157,8 @@ main() {
 
   set status-left ""
 
-  set status-right "${right_column1},${right_column2}"
+  # Use a space between right columns to avoid odd comma rendering/truncation
+  set status-right "${right_column1} ${right_column2}"
 
   setw window-status-format "${window_status_format}"
   setw window-status-current-format "${window_status_current_format}"
