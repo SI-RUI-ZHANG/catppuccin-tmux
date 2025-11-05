@@ -157,8 +157,8 @@ main() {
 
   set status-left ""
 
-  # Use a space between right columns to avoid odd comma rendering/truncation
-  set status-right "${right_column1} ${right_column2}"
+  # Reset style between right segments to ensure both render distinctly
+  set status-right "${right_column1}#[fg=default,bg=default,nobold,nounderscore,noitalics] ${right_column2}"
 
   setw window-status-format "${window_status_format}"
   setw window-status-current-format "${window_status_current_format}"
