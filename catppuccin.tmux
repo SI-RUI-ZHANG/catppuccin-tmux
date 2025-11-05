@@ -91,16 +91,16 @@ main() {
   local show_directory
   # No rounded separator on right; simple colored pill chunks
   # Close client_prefix conditional to avoid swallowing the rest of status-right
-  readonly show_directory="#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],}"
+  readonly show_directory="#[fg=$thm_bg,bg=$thm_pink]  #[fg=$thm_fg,bg=$thm_gray]   #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],}"
 
   local show_window
   # No rounded separator on right; simple colored pill chunks
   # Close client_prefix conditional to avoid swallowing the rest of status-right
-  readonly show_window="#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red],}"
+  readonly show_window="#[fg=$thm_bg,bg=$thm_pink]  #[fg=$thm_fg,bg=$thm_gray]  #W #{?client_prefix,#[fg=$thm_red],}"
 
   local show_session
   # No rounded separator; keep conditional red/green background
-  readonly show_session="#{?client_prefix,#[fg=$thm_bg,bg=$thm_red],#[fg=$thm_bg,bg=$thm_green]} #[fg=$thm_fg,bg=$thm_gray] #S "
+  readonly show_session="#{?client_prefix,#[fg=$thm_bg,bg=$thm_red],#[fg=$thm_bg,bg=$thm_green]}  #[fg=$thm_fg,bg=$thm_gray]  #S "
 
   local show_directory_in_window_status
   # Window tabs: add left rounding and ensure separator cells use default bg
@@ -122,15 +122,15 @@ main() {
 
   local show_user
   # No rounded separator on right
-  readonly show_user="#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
+  readonly show_user="#[fg=$thm_bg,bg=$thm_blue]  #[fg=$thm_fg,bg=$thm_gray]  #(whoami) "
 
   local show_host
   # No rounded separator on right
-  readonly show_host="#[fg=$thm_bg,bg=$thm_blue]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
+  readonly show_host="#[fg=$thm_bg,bg=$thm_blue]  #[fg=$thm_fg,bg=$thm_gray] 󰒋 #H "
 
   local show_date_time
   # No rounded separator on right
-  readonly show_date_time="#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
+  readonly show_date_time="#[fg=$thm_bg,bg=$thm_blue]  #[fg=$thm_fg,bg=$thm_gray]  $date_time "
 
   # Right column 1 by default shows the Window name.
   local right_column1=$show_window
