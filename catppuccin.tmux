@@ -101,18 +101,18 @@ main() {
   local show_directory_in_window_status
   # Window tabs: add left rounding and ensure separator cells use default bg
   #readonly show_directory_in_window_status="#[fg=$thm_blue,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
-  # Right-rounded only for the rightmost tab; others square on both sides
-  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W #{?#{==:#{window_index},#{last_window_index}},#[fg=$thm_blue,bg=default]$left_separator,}#[fg=$thm_fg,bg=default]"
+  # Only right-rounded edge per tab (no leading round), square left
+  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default]"
 
   local show_directory_in_window_status_current
   #readonly show_directory_in_window_status_current="#[fg=$thm_orange,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} #[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
-  readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #{?#{==:#{window_index},#{last_window_index}},#[fg=$thm_orange,bg=default]$left_separator,}#[fg=$thm_fg,bg=default]"
+  readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default]"
 
   local show_window_in_window_status
-  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_blue] #I#{?#{==:#{window_index},#{last_window_index}},#[fg=$thm_blue,bg=default]$left_separator,}#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics]"
+  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics]"
 
   local show_window_in_window_status_current
-  readonly show_window_in_window_status_current="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_orange] #I#{?#{==:#{window_index},#{last_window_index}},#[fg=$thm_orange,bg=default]$left_separator,}#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics]"
+  readonly show_window_in_window_status_current="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_orange] #I#[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics]"
  #setw -g window-status-current-format "#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
 
 
