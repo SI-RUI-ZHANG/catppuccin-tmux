@@ -40,7 +40,9 @@ main() {
 
   # status
   set status "on"
-  set status-bg "${thm_bg}"
+  # Use a transparent status background to blend with terminal
+  set status-bg "default"
+  set status-style "bg=default"
   set status-justify "left"
   set status-left-length "100"
   set status-right-length "100"
@@ -53,10 +55,10 @@ main() {
   set pane-border-style "fg=${thm_gray}"
   set pane-active-border-style "fg=${thm_blue}"
 
-  # windows
-  setw window-status-activity-style "fg=${thm_fg},bg=${thm_bg},none"
+  # windows (transparent inactive tab background)
+  setw window-status-activity-style "fg=${thm_fg},bg=default,none"
   setw window-status-separator ""
-  setw window-status-style "fg=${thm_fg},bg=${thm_bg},none"
+  setw window-status-style "fg=${thm_fg},bg=default,none"
 
   # --------=== Statusline
 
@@ -87,27 +89,29 @@ main() {
 
   # These variables are the defaults so that the setw and set calls are easier to parse.
   local show_directory
-  readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
+  # Draw the rounded separator over the default background to avoid a dark cap
+  readonly show_directory="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
 
   local show_window
-  readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
+  readonly show_window="#[fg=$thm_pink,bg=default,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
 
   local show_session
-  readonly show_session="#[fg=$thm_green]}#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
+  readonly show_session="#[fg=$thm_green,bg=default]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
 
   local show_directory_in_window_status
-  #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
-  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W "
+  # Window tabs: add left rounding and ensure separator cells use default bg
+  #readonly show_directory_in_window_status="#[fg=$thm_blue,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
+  readonly show_directory_in_window_status="#[fg=$thm_blue,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
 
   local show_directory_in_window_status_current
-  #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
-  readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
+  #readonly show_directory_in_window_status_current="#[fg=$thm_orange,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} #[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
+  readonly show_directory_in_window_status_current="#[fg=$thm_orange,bg=default]$right_separator#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
 
   local show_window_in_window_status
-  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+  readonly show_window_in_window_status="#[fg=$thm_blue,bg=default]$right_separator#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics] "
 
   local show_window_in_window_status_current
-  readonly show_window_in_window_status_current="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_orange] #I#[fg=$thm_orange,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+  readonly show_window_in_window_status_current="#[fg=$thm_orange,bg=default]$right_separator#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_orange] #I#[fg=$thm_orange,bg=default]$left_separator#[fg=$thm_fg,bg=default,nobold,nounderscore,noitalics] "
  #setw -g window-status-current-format "#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
 
 
