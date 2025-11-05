@@ -53,10 +53,10 @@ main() {
   set pane-border-style "fg=${thm_gray}"
   set pane-active-border-style "fg=${thm_blue}"
 
-  # windows (transparent inactive tab background)
-  setw window-status-activity-style "fg=${thm_fg},bg=default,none"
+  # windows
+  setw window-status-activity-style "fg=${thm_fg},bg=${thm_bg},none"
   setw window-status-separator ""
-  setw window-status-style "fg=${thm_fg},bg=default,none"
+  setw window-status-style "fg=${thm_fg},bg=${thm_bg},none"
 
   # --------=== Statusline
 
@@ -87,20 +87,16 @@ main() {
 
   # These variables are the defaults so that the setw and set calls are easier to parse.
   local show_directory
-  # Right-side: square lead block (pink) then gray content
-  readonly show_directory="#[fg=$thm_pink,bg=$thm_pink]█#[fg=$thm_bg,bg=$thm_pink]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],}"
+  readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
 
   local show_window
-  # Right-side: square lead block (pink) then gray window name
-  readonly show_window="#[fg=$thm_pink,bg=$thm_pink]█#[fg=$thm_bg,bg=$thm_pink] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red],}"
+  readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
 
   local show_session
-  # Right-side: square lead block with conditional color (red when prefix), then gray
-  readonly show_session="#{?client_prefix,#[fg=$thm_red,bg=$thm_red]█#[fg=$thm_bg,bg=$thm_red],#[fg=$thm_green,bg=$thm_green]█#[fg=$thm_bg,bg=$thm_green]} #[fg=$thm_fg,bg=$thm_gray] #S "
+  readonly show_session="#[fg=$thm_green]}#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
 
   local show_directory_in_window_status
-  # Window tabs: add left rounding and ensure separator cells use default bg
-  #readonly show_directory_in_window_status="#[fg=$thm_blue,bg=default]$right_separator#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #[fg=$thm_blue,bg=default]$left_separator#[fg=$thm_fg,bg=default] "
+  #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
   readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W "
 
   local show_directory_in_window_status_current
@@ -116,16 +112,13 @@ main() {
 
 
   local show_user
-  # Right-side: square lead block (blue) then gray content
-  readonly show_user="#[fg=$thm_blue,bg=$thm_blue]█#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
+  readonly show_user="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
 
   local show_host
-  # Right-side: square lead block (blue) then gray content
-  readonly show_host="#[fg=$thm_blue,bg=$thm_blue]█#[fg=$thm_bg,bg=$thm_blue]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
+  readonly show_host="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
 
   local show_date_time
-  # Right-side: square lead block (blue) then gray content
-  readonly show_date_time="#[fg=$thm_blue,bg=$thm_blue]█#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
+  readonly show_date_time="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
 
   # Right column 1 by default shows the Window name.
   local right_column1=$show_window
@@ -159,8 +152,7 @@ main() {
 
   set status-left ""
 
-  # Join right columns with a space (avoid literal comma)
-  set status-right "${right_column1} ${right_column2}"
+  set status-right "${right_column1},${right_column2}"
 
   setw window-status-format "${window_status_format}"
   setw window-status-current-format "${window_status_current_format}"
